@@ -38,9 +38,9 @@ function beginGame(players){
   }
   players.sort(function(a, b) {return a.score - b.score});
   let bottomScore = players.shift();
-  alert(bottomScore.name + " eliminated with a measly " + bottomScore.score);
+  console.log(bottomScore.name + " eliminated with a measly " + bottomScore.score);
   bottomScore = players.shift();
-  alert(bottomScore.name + " was also eliminated this round with a " + bottomScore.score);
+  console.log(bottomScore.name + " was also eliminated this round with a " + bottomScore.score);
 }
 function middleGame(players){
   for (var i = 0; i < players.length; i++) {
@@ -48,21 +48,35 @@ function middleGame(players){
   }
   players.sort(function(a,b) {return a.score - b.score});
   let bottomScore = players.shift();
-  alert(bottomScore.name + " was eliminated this round with a " + bottomScore.score);
+  console.log(bottomScore.name + " was eliminated this round with a " + bottomScore.score);
 }
 function endGame(players){
   for (var i = 0; i < players.length; i++) {
     players[i].score = shootoutRoll();
   }
-
+  if (players[0].score !== players[1].score) {
+    players.sort(function(a,b) {return a.score - b.score});
+    let bottomScore = players.shift();
+    console.log(bottomScore.name + " lost with a " + bottomScore.score);
+    let winner = players.shift(); //should be last player
+    console.log(winner.name + " won!");
+  } else{
+    console.log("There was a tie! Another round!");
+    endGame(players);
+  }
+}
+function runGame(){
+  var round = 1;
+  for (var i = 0; i < array.length; i++) {
+    array[i]
+  }
 }
 
+
 createPlayers();
-console.log(players);
-console.log(players.length);
 beginGame(players);
-console.log(players);
-console.log(players.length);
 beginGame(players);
-console.log(players);
-console.log(players.length);
+beginGame(players);
+middleGame(players);
+middleGame(players);
+endGame(players);
