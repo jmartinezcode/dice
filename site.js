@@ -50,6 +50,12 @@ function middleGame(players){
   let bottomScore = players.shift();
   alert(bottomScore.name + " was eliminated this round with a " + bottomScore.score);
 }
+function endGame(players){
+  for (var i = 0; i < players.length; i++) {
+    players[i].score = shootoutRoll();
+  }
+
+}
 
 createPlayers();
 console.log(players);
