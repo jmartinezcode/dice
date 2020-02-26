@@ -1,4 +1,5 @@
 
+var currentRound = 1;
 var rounds = 6;
 var players = [
   {name: "Walter White",
@@ -22,6 +23,16 @@ var players = [
   {name: "Gale Boetticher",
   score: 0}
 ];
+function createTable() {
+  var table ='<tr class="table-default"><th scope="col">Current Round '+ currentRound +'</th><th scope="col">Score</th></tr>';
+  for (var i = 0; i < players.length; i++) {
+    var row = '<tr class="table-active">';
+    row += '<th scope="row">'+ players[i].name + '</th>';
+    row += '<td>'+ players[i].score + '</td> </tr>';
+    table += row;
+  }
+  document.getElementById("players").innerHTML = table;
+}
 
 function rollDie(sides){
   return Math.floor(Math.random()*sides) + 1;
@@ -94,10 +105,10 @@ function runGame(){
 }
 
 
-//createPlayers();
+createTable();
 beginGame(players);
-beginGame(players);
-beginGame(players);
-middleGame(players);
-middleGame(players);
-endGame(players);
+// beginGame(players);
+// beginGame(players);
+// middleGame(players);
+// middleGame(players);
+// endGame(players);
