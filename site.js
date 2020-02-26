@@ -24,15 +24,16 @@ var players = [
   score: 0}
 ];
 function createTable() {
-  var table ='<tr class="table-default"><th scope="col">Current Round '+ currentRound +'</th><th scope="col">Score</th></tr>';
+  var table ='<tr class="table-default"><th scope="col">Current Round: '+ currentRound +'</th><th scope="col">Score</th></tr>';
   for (var i = 0; i < players.length; i++) {
-    var row = '<tr class="table-active">';
+    var row = '<tr class="table-dark">';
     row += '<th scope="row">'+ players[i].name + '</th>';
     row += '<td>'+ players[i].score + '</td> </tr>';
     table += row;
   }
   document.getElementById("players").innerHTML = table;
 }
+
 
 function rollDie(sides){
   return Math.floor(Math.random()*sides) + 1;
@@ -50,65 +51,54 @@ function shootoutRoll(){
 
 const diceSet = [4, 6, 8, 10, 12, 20];
 
-//function createPlayers(){
-//  for (var i = 1; i <= 10; i++) {
-//    let player = {
-//      name: "Player " + i,
-//      score: 0
-//    };
-//    players.push(player);
-//  }
-//}
-
 function roundScore(){
   let roll = diceSet.map(x => rollDie(x));
   return roll.reduce((a,b) => a + b, 0);
 }
-function beginGame(players){
+
+function beginGame(){
   for (var i = 0; i < players.length; i++) {
     players[i].score = roundScore();
   }
-  players.sort(function(a, b) {return a.score - b.score});
-  let bottomScore = players.shift();
-  console.log(bottomScore.name + " eliminated with a measly " + bottomScore.score);
-  bottomScore = players.shift();
-  console.log(bottomScore.name + " was also eliminated this round with a " + bottomScore.score);
 }
-function middleGame(players){
-  for (var i = 0; i < players.length; i++) {
-    players[i].score = roundScore();
-  }
-  players.sort(function(a,b) {return a.score - b.score});
-  let bottomScore = players.shift();
-  console.log(bottomScore.name + " was eliminated this round with a " + bottomScore.score);
-}
-function endGame(players){
+
+function endGame(){
   for (var i = 0; i < players.length; i++) {
     players[i].score = shootoutRoll();
   }
   if (players[0].score !== players[1].score) {
-    players.sort(function(a,b) {return a.score - b.score});
-    let bottomScore = players.shift();
-    console.log(bottomScore.name + " lost with a " + bottomScore.score);
+    sortPlayers();
+    shiftPlayers();
     let winner = players.shift(); //should be last player
     console.log(winner.name + " won!");
   } else{
     console.log("There was a tie! Another round!");
-    endGame(players);
+    endGame();
   }
 }
 function runGame(){
-  var round = 1;
-  for (var i = 0; i < array.length; i++) {
-    array[i]
+  if (currentRound <= 3) {
+    beginGame();
+    sortPlayers();
+    createTable();
+    shiftPlayers();
+    shiftPlayers();
+    currentRound++;
+  } else if (currentRound <= 5) {
+    beginGame();
+    sortPlayers();
+    createTable();
+    shiftPlayers();
+    currentRound++;
+  } else {
+    createTable();
+    endGame();
+    currentRound++;
   }
 }
-
-
-createTable();
-beginGame(players);
-// beginGame(players);
-// beginGame(players);
-// middleGame(players);
-// middleGame(players);
-// endGame(players);
+function shiftPlayers(){
+  players.shift();
+}
+function sortPlayers(){
+  players.sort(function(a,b) {return a.score - b.score});
+}

@@ -1,0 +1,14 @@
+#title-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+body{
+  background-image: url("img/bb_bg.jpg");
+}
+h1 {
+  font-family: 'Alfa Slab One', ;
+}
