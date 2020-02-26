@@ -1,6 +1,27 @@
 
 var rounds = 6;
-var players = [];
+var players = [
+  {name: "Walter White",
+  score: 0},
+  {name: "Jesse Pinkman",
+  score: 0},
+  {name: "Mike Ehrmantraut",
+  score: 0},
+  {name: "Saul Goodman",
+  score: 0},
+  {name: "Hank Schrader",
+  score: 0},
+  {name: "Gustavo Fring",
+  score: 0},
+  {name: "Hector Salamanca",
+  score: 0},
+  {name: "Skyler White",
+  score: 0},
+  {name: "Tuco Salamanca",
+  score: 0},
+  {name: "Gale Boetticher",
+  score: 0}
+];
 
 function rollDie(sides){
   return Math.floor(Math.random()*sides) + 1;
@@ -18,15 +39,15 @@ function shootoutRoll(){
 
 const diceSet = [4, 6, 8, 10, 12, 20];
 
-function createPlayers(){
-  for (var i = 1; i <= 10; i++) {
-    let player = {
-      name: "Player " + i,
-      score: 0
-    };
-    players.push(player);
-  }
-}
+//function createPlayers(){
+//  for (var i = 1; i <= 10; i++) {
+//    let player = {
+//      name: "Player " + i,
+//      score: 0
+//    };
+//    players.push(player);
+//  }
+//}
 
 function roundScore(){
   let roll = diceSet.map(x => rollDie(x));
@@ -73,7 +94,7 @@ function runGame(){
 }
 
 
-createPlayers();
+//createPlayers();
 beginGame(players);
 beginGame(players);
 beginGame(players);
