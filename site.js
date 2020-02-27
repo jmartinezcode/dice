@@ -23,6 +23,7 @@ var players = [
   {name: "Gale Boetticher",
   score: 0}
 ];
+
 function createHeader(){
   if (players.length == 10) {
     return '<tr class="table-default"><th scope="col"> First Round </th><th scope="col">Score</th></tr>';
@@ -83,14 +84,11 @@ function endGame(){
     console.log("There was a tie! Another round!");
   }
 }
-function declareWinner(){
-    document.getElementById("mybutton").innerHTML = "Play Again";
-    document.getElementById("mybutton").onclick = resetTable();
-}
 
 function resetTable() {
   location.reload();
 }
+
 function manageButton(){
   if (players.length > 9) {
     document.getElementById("gamebutton").innerHTML = '<button onclick="runGame()" type="button" class="btn btn-primary btn-lg">Start Game</button>';
@@ -103,9 +101,9 @@ function manageButton(){
   }
   else if (players.length == 1) {
     document.getElementById("gamebutton").innerHTML = '<button onclick="resetTable()" type="button" class="btn btn-primary btn-lg">Play Again</button>';
-    //document.getElementById("mybutton").onclick = resetTable();
   }
 }
+
 manageButton();
 function runGame(){
   createTable();
@@ -126,13 +124,14 @@ function runGame(){
   } else {
     createTable();
     endGame();
-
     currentRound++;
   }
 }
+
 function shiftPlayers(){
   players.shift();
 }
+
 function sortPlayers(){
   players.sort(function(a,b) {return a.score - b.score});
 }
