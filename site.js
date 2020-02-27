@@ -23,8 +23,17 @@ var players = [
   {name: "Gale Boetticher",
   score: 0}
 ];
+function createHeader(){
+  if (players.length == 10) {
+    return '<tr class="table-default"><th scope="col"> First Round </th><th scope="col">Score</th></tr>';
+  } else if (players.length == 1) {
+    return '<tr class="table-default"><th scope="col"> Winner </th><th scope="col">Winning Score</th></tr>';
+  } else {
+    return '<tr class="table-default"><th scope="col">Round: '+ currentRound +' Results</th><th scope="col">Score</th></tr>';
+  }
+}
 function createTable() {
-  var table ='<tr class="table-default"><th scope="col">Current Round: '+ currentRound +'</th><th scope="col">Score</th></tr>';
+  var table = createHeader();
   for (var i = 0; i < players.length; i++) {
     var row = '<tr class="table-dark">';
     row += '<th scope="row">'+ players[i].name + '</th>';
@@ -69,27 +78,35 @@ function endGame(){
   if (players[0].score !== players[1].score) {
     sortPlayers();
     createTable();
-    shiftPlayers();    
-
+    shiftPlayers();
   } else{
     console.log("There was a tie! Another round!");
   }
 }
 function declareWinner(){
-  if (players.length == 1) {
-    let winner = players[0];
     document.getElementById("mybutton").innerHTML = "Play Again";
     document.getElementById("mybutton").onclick = resetTable();
-  }
 }
+
 function resetTable() {
   location.reload();
 }
 function manageButton(){
-  if (players.length > 1) {
-    document.getElementById("mybutton").innerHTML = "Next Round";
+  if (players.length > 9) {
+    document.getElementById("gamebutton").innerHTML = '<button onclick="runGame()" type="button" class="btn btn-primary btn-lg">Start Game</button>';
+  }
+  else if (players.length > 2) {
+    document.getElementById("gamebutton").innerHTML = '<button onclick="runGame()" type="button" class="btn btn-primary btn-lg">Next Round</button>';
+  }
+  else if (players.length > 1) {
+    document.getElementById("gamebutton").innerHTML = '<button onclick="runGame()" type="button" class="btn btn-primary btn-lg">See Winner</button>';
+  }
+  else if (players.length == 1) {
+    document.getElementById("gamebutton").innerHTML = '<button onclick="resetTable()" type="button" class="btn btn-primary btn-lg">Play Again</button>';
+    //document.getElementById("mybutton").onclick = resetTable();
   }
 }
+manageButton();
 function runGame(){
   createTable();
   manageButton();
