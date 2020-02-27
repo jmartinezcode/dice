@@ -68,15 +68,31 @@ function endGame(){
   }
   if (players[0].score !== players[1].score) {
     sortPlayers();
-    shiftPlayers();
-    let winner = players.shift(); //should be last player
-    console.log(winner.name + " won!");
+    createTable();
+    shiftPlayers();    
+
   } else{
     console.log("There was a tie! Another round!");
-    endGame();
+  }
+}
+function declareWinner(){
+  if (players.length == 1) {
+    let winner = players[0];
+    document.getElementById("mybutton").innerHTML = "Play Again";
+    document.getElementById("mybutton").onclick = resetTable();
+  }
+}
+function resetTable() {
+  location.reload();
+}
+function manageButton(){
+  if (players.length > 1) {
+    document.getElementById("mybutton").innerHTML = "Next Round";
   }
 }
 function runGame(){
+  createTable();
+  manageButton();
   if (currentRound <= 3) {
     beginGame();
     sortPlayers();
@@ -93,6 +109,7 @@ function runGame(){
   } else {
     createTable();
     endGame();
+
     currentRound++;
   }
 }

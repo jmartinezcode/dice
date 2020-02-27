@@ -6,9 +6,14 @@
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
-body{
-  background-image: url("img/bb_bg.jpg");
+html{
+  background: url(../img/bb_bg.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 h1 {
-  font-family: 'Alfa Slab One', ;
+  font-family: 'Alfa Slab One';
+  font-size: 72px;
 }
